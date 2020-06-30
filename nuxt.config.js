@@ -4,7 +4,7 @@
  * @Author: YoungW
  * @Date: 2020-06-29 21:14:33
  * @LastEditors: YoungW
- * @LastEditTime: 2020-06-29 21:38:02
+ * @LastEditTime: 2020-06-30 16:46:43
  */ 
 
 export default {
@@ -23,7 +23,7 @@ export default {
   ** See https://nuxtjs.org/api/configuration-head
   */
   head: {
-    title: process.env.npm_package_name || '',
+    title: '北京美团网-北京美食_酒店_旅游_团购_电影_吃喝玩乐' || process.env.npm_package_name,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -39,7 +39,7 @@ export default {
   css: [
     'element-ui/lib/theme-chalk/reset.css',
     'element-ui/lib/theme-chalk/index.css',
-    // '~assets/css/main.css'
+    '~assets/css/main.css'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -58,7 +58,7 @@ export default {
   */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
+    // '@nuxtjs/eslint-module'
   ],
   /*
   ** Nuxt.js modules
