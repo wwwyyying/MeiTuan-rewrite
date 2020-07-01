@@ -4,7 +4,7 @@
  * @Author: YoungW
  * @Date: 2020-06-30 13:34:24
  * @LastEditors: YoungW
- * @LastEditTime: 2020-06-30 17:31:06
+ * @LastEditTime: 2020-07-01 20:42:48
 -->
 <template>
   <div class="search-panel">
@@ -26,20 +26,14 @@
           <button class="el-button el-button--primary"><i class="el-icon-search" /></button> 
           <dl class="hotPlace" v-if="isHotPlace">
             <dt>热门搜索</dt>
-            <dd v-for="(item, idx) in hotPlace" :key="idx">{{ item }}</dd>
+            <dd v-for="(item, idx) in $store.state.home.hotPlace.slice(0,5)" :key="idx">{{ item.name }}</dd>
           </dl>
           <dl class="searchList" v-if="isSearchList">
-            <dd v-for="(item, idx) in searchList" :key="idx">{{ item }}</dd>
+            <dd v-for="(item, idx) in searchList" :key="idx">{{ item.name }}</dd>
           </dl>
         </div>
         <p class="suggest">
-          <a href="#">故宫博物院</a>
-          <a href="#">故宫博物院</a>
-          <a href="#">故宫博物院</a>
-          <a href="#">故宫博物院</a>
-          <a href="#">故宫博物院</a>
-          <a href="#">故宫博物院</a>
-          <a href="#">故宫博物院</a>
+          <a href="#" v-for="(item, idx) in $store.state.home.hotPlace.slice(0, 5)" :key="idx">{{item.name}}</a>
         </p>
         <ul class="nav">
           <li><nuxt-link to="/" class="takeout">美团外卖</nuxt-link></li>
@@ -61,13 +55,14 @@
 </template>
 
 <script>
+import _ from 'lodash'
 export default {
   data () {
     return {
       search: '',
       isFocus: false,
       hotPlace: ['火锅', '烤鱼', '烧烤'],
-      searchList: ['串串', '麻辣烫', '等等']
+      searchList: []
     }
   },
   computed: {
@@ -83,15 +78,24 @@ export default {
       this.isFocus = true
     },
     blur () {
-      const self = this
+      let self = this
       //  对搜索框的失去焦点事件做一个延时，防止热门搜索以及相关搜索点击失效的问题
       setTimeout(function () {
         self.isFocus = false
       }, 200)
     },
-    input () {
-      console.log('input')
-    }
+    input:_.debounce(async function(){
+      let self = this
+      let city = self.$store.state.geo.position.city.replace('市', '')
+      self.searchList = []
+      let {status, data: {top}} = await self.$axios.get('/search/top', {
+        params: {
+          input: self.search,
+          city
+        }
+      })
+      self.searchList = top.slice(0, 10)  //截取前十条数据
+    }, 300)
   }
 }
 </script>

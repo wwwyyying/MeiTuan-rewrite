@@ -4,11 +4,11 @@
  * @Author: YoungW
  * @Date: 2020-06-30 13:33:41
  * @LastEditors: YoungW
- * @LastEditTime: 2020-06-30 13:52:22
+ * @LastEditTime: 2020-07-01 15:21:22
 -->
 <template>
   <div class="m-geo">
-    <i class="el-icon-location" />北京市
+    <i class="el-icon-location" />{{$store.state.geo.position.city}}
     <nuxt-link
       class="changeCity"
       to="/changeCity">

@@ -4,7 +4,7 @@
  * @Author: YoungW
  * @Date: 2020-06-30 18:41:23
  * @LastEditors: YoungW
- * @LastEditTime: 2020-06-30 19:32:21
+ * @LastEditTime: 2020-07-01 20:36:01
 -->
 <template>
   <section class="m-istyle">
@@ -37,37 +37,7 @@ export default {
     return {
       kind: 'all',
       list: {
-        all: [{
-          title: '丰泽园饭店（王府井店）',
-          img: '//p0.meituan.net/msmerchant/c08c616aa835bc7cebdc3bd17184afef312214.jpg@368w_208h_1e_1c',
-          pos: '2人自选套餐，提供免费WiFi',
-          price: 248
-        }, {
-          title: '中央电视塔空中观景旋转餐厅',
-          img: '//p1.meituan.net/msmerchant/7776f22c9d6fd0413b7e52441b3f74557386836.jpg@368w_208h_1e_1c',
-          pos: '午餐+观光',
-          price: 248
-        }, {
-          title: '北京饭店诺金东33餐厅',
-          img: '//p1.meituan.net/poi/697cf6a6e1785559a7bb31d0bf03c649110592.jpg@368w_208h_1e_1c',
-          pos: '桌餐C，建议8-10人使用，可免费使用包间',
-          price: 5000
-        }, {
-          title: '丰泽园饭店（王府井店）',
-          img: '//p0.meituan.net/msmerchant/c08c616aa835bc7cebdc3bd17184afef312214.jpg@368w_208h_1e_1c',
-          pos: '2人自选套餐，提供免费WiFi',
-          price: 248
-        }, {
-          title: '中央电视塔空中观景旋转餐厅',
-          img: '//p1.meituan.net/msmerchant/7776f22c9d6fd0413b7e52441b3f74557386836.jpg@368w_208h_1e_1c',
-          pos: '午餐+观光',
-          price: 248
-        }, {
-          title: '北京饭店诺金东33餐厅',
-          img: '//p1.meituan.net/poi/697cf6a6e1785559a7bb31d0bf03c649110592.jpg@368w_208h_1e_1c',
-          pos: '桌餐C，建议8-10人使用，可免费使用包间',
-          price: 5000
-        }],
+        all: [],
         part: [],
         spa: [],
         movie: [],
@@ -80,7 +50,60 @@ export default {
       return this.list[this.kind]
     }
   },
-
+  async mounted () {
+    let self = this
+    let {status, data: {count, pois}} = await self.$axios.get('/search/resultsByKeywords', {
+      params: {
+        keyword: '景点',
+        city: self.$store.state.geo.position.city
+      }
+    })
+    if (status===200&&count>0){
+      let r = pois.filter((item) => item.photos.length).map(item => {
+        return {
+          title: item.name,
+          pos: item.type.split(';')[0],
+          price: item.biz_ext.cost || '暂无',
+          img: item.photos[0].url,
+          url: '//abc.com'
+        }
+      })
+      self.list[self.kind] = r.slice(0, 9)
+    } else {
+      self.list[self.kind] = []
+    }
+  },
+  methods: {
+    over: async function (e) {
+      let dom = e.target 
+      let tag = dom.tagName.toLowerCase()
+      let self = this
+      if (tag === 'dd') {
+        this.kind = dom.getAttribute('kind')
+        let keyword = dom.getAttribute('keyword')
+        let {status, data: {count, pois}} = await self.$axios.get('/search/resultsByKeywords', {
+          params: {
+            keyword,
+            city: self.$store.state.geo.position.city
+          }
+        })
+        if (status===200&&count>0){
+          let r = pois.filter((item) => item.photos.length).map(item => {
+            return {
+              title: item.name,
+              pos: item.type.split(';')[0],
+              price: item.biz_ext.cost || '暂无',
+              img: item.photos[0].url,
+              url: '//abc.com'
+            }
+          })
+          self.list[self.kind] = r.slice(0, 9)
+        } else {
+          self.list[self.kind] = []
+        }
+      }
+    }
+  }
 }
 </script>
 
