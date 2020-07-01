@@ -4,7 +4,7 @@
  * @Author: YoungW
  * @Date: 2020-06-30 13:34:07
  * @LastEditors: YoungW
- * @LastEditTime: 2020-06-30 13:57:39
+ * @LastEditTime: 2020-07-01 09:18:42
 -->
 <template>
   <div class="m-user">
@@ -24,6 +24,12 @@ export default {
   data () {
     return {
       user: ''
+    }
+  },
+  async mounted () {
+    const {status, data:{user}} = await this.$axios.get('/users/getUser')
+    if (status===200) {
+      this.user = user
     }
   }
 }

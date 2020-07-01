@@ -4,10 +4,10 @@
  * @Author: YoungW
  * @Date: 2020-06-29 21:14:33
  * @LastEditors: YoungW
- * @LastEditTime: 2020-06-30 16:46:43
+ * @LastEditTime: 2020-07-01 11:28:56
  */ 
 
-export default {
+module.exports = {
   /*
   ** Nuxt rendering mode
   ** See https://nuxtjs.org/api/configuration-mode
