@@ -4,7 +4,7 @@
  * @Author: YoungW
  * @Date: 2020-06-30 13:34:24
  * @LastEditors: YoungW
- * @LastEditTime: 2020-07-01 20:42:48
+ * @LastEditTime: 2020-07-02 15:10:09
 -->
 <template>
   <div class="search-panel">
@@ -26,14 +26,20 @@
           <button class="el-button el-button--primary"><i class="el-icon-search" /></button> 
           <dl class="hotPlace" v-if="isHotPlace">
             <dt>热门搜索</dt>
-            <dd v-for="(item, idx) in $store.state.home.hotPlace.slice(0,5)" :key="idx">{{ item.name }}</dd>
+            <dd v-for="(item, idx) in $store.state.home.hotPlace.slice(0,5)" :key="idx">
+              <a :href="'/products?keyword='+encodeURIComponent(item.name)">{{ item.name }}</a>
+            </dd>
           </dl>
           <dl class="searchList" v-if="isSearchList">
-            <dd v-for="(item, idx) in searchList" :key="idx">{{ item.name }}</dd>
+            <dd v-for="(item, idx) in searchList" :key="idx">
+              <a :href="'/products?keyword='+encodeURIComponent(item.name)">{{ item.name }}</a>
+            </dd>
           </dl>
         </div>
         <p class="suggest">
-          <a href="#" v-for="(item, idx) in $store.state.home.hotPlace.slice(0, 5)" :key="idx">{{item.name}}</a>
+          <a :href="'/products?keyword='+encodeURIComponent(item.name)" v-for="(item, idx) in $store.state.home.hotPlace.slice(0, 5)" :key="idx">
+            {{item.name}}
+          </a>
         </p>
         <ul class="nav">
           <li><nuxt-link to="/" class="takeout">美团外卖</nuxt-link></li>
