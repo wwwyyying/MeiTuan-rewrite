@@ -4,7 +4,7 @@
  * @Author: YoungW
  * @Date: 2020-07-03 14:42:41
  * @LastEditors: YoungW
- * @LastEditTime: 2020-07-03 15:50:33
+ * @LastEditTime: 2020-07-03 16:40:57
 --> 
 <template>
   <li class="m-detail-item" v-if="meta.photos.length">
@@ -45,8 +45,24 @@ export default {
     }
   },
   methods: {
-    createCart() {
-      
+    async createCart() {
+      let self = this
+      let {status, data: {code, id}} = await self.$axios.post('/cart/create', {
+        params: {
+          id: Math.random().toString().slice(3,9),
+          detail: {
+            name: self.meta.name,
+            price: self.meta.biz_ext.cost,
+            imgs: self.meta.photos
+          }
+        }
+      })
+
+      if (status===200&&code===0) {
+        window.location.href = `cart/?id=${id}`
+      } else {
+        console.log('error')
+      }
     }
   }
 }
