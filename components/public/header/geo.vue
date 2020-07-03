@@ -4,7 +4,7 @@
  * @Author: YoungW
  * @Date: 2020-06-30 13:33:41
  * @LastEditors: YoungW
- * @LastEditTime: 2020-07-01 15:21:22
+ * @LastEditTime: 2020-07-03 20:35:49
 -->
 <template>
   <div class="m-geo">
@@ -14,7 +14,7 @@
       to="/changeCity">
       切换城市
     </nuxt-link>
-    [香河 廊坊 天津]
+    热门：{{$store.state.home.hotPlace[0].name}}
   </div>
 </template>
 
@@ -24,6 +24,3 @@ export default {
 }
 </script>
 
-<style>
-
-</style>

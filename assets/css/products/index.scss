@@ -61,7 +61,7 @@
 
           >b {
             float: right;
-            border: 1px solid #31BBAC;
+            border: 1px solid #FE8C00;
             background-color: rgb(255, 153, 0);
             border-color: rgb(255, 153, 0);
             color: rgb(255, 255, 255);
@@ -136,7 +136,7 @@
           cursor: pointer;
 
           &.s-nav-active {
-            color: #31BCAD;
+            color: #FE8C00;
           }
         }
 
@@ -190,8 +190,8 @@
 
         &:nth-child(2) {
           border-radius: 100px;
-          background: #13D1BE;
-          color: #FFF;
+          background: #FFBD00;
+          color: #222222;
           height: 22px;
           line-height: 22px;
           width: 40px;

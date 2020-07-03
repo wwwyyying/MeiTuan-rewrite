@@ -1,42 +1,34 @@
-/*
- * @Description: 
- * @version: 
- * @Author: YoungW
- * @Date: 2020-07-03 17:05:14
- * @LastEditors: YoungW
- * @LastEditTime: 2020-07-03 17:05:37
- */ 
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 const Order = new Schema({
   id: {
     type: String,
-    required: true
+    require: true
   },
   user:{
     type:String,
-    required:true
+    require:true
   },
   time:{
     type:String,
-    required:true
+    require:true
   },
   total:{
     type:Number,
-    required:true
+    require:true
   },
   imgs:{
     type:Array,
-    required:true
+    require:true
   },
   name:{
     type:String,
-    required:true
+    require:true
   },
   status:{
     type:Number,
-    required:true
+    require:true
   }
 })
 
-module.exports = mongoose.model('Order', Order)
+export default mongoose.model('Order', Order)

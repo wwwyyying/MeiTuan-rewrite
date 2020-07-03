@@ -1,38 +1,35 @@
-<!--
- * @Description: 
- * @version: 
- * @Author: YoungW
- * @Date: 2020-07-02 07:27:48
- * @LastEditors: YoungW
- * @LastEditTime: 2020-07-02 08:18:27
---> 
 <template>
   <div class="page-changeCity">
-    <el-row :span="24">
-      <i-select/>
+    <el-row>
+      <el-col :span="24">
+        <iSelect/>
+      </el-col>
     </el-row>
-    <el-row :span="24">
-      <hot />
+    <el-row>
+      <el-col :span="24">
+        <hot/>
+      </el-col>
     </el-row>
-    <el-row :span="24">
-      <category />
+    <el-row>
+      <el-col :span="24">
+        <categroy/>
+      </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
-import iSelect from '@/components/changeCity/iselect'
-import Hot from '@/components/changeCity/hot'
-import Category from '@/components/changeCity/category'
+import iSelect from '@/components/changeCity/iselect.vue'
+import Hot from '@/components/changeCity/hot.vue'
+import Categroy from '@/components/changeCity/categroy.vue'
 export default {
-  components: {
+  components:{
     iSelect,
     Hot,
-    Category
+    Categroy
   }
 }
 </script>
 
-<style lang="scss">
-
+<style lang="css">
 </style>

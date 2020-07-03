@@ -19,11 +19,11 @@
       margin: 0 4px;
       padding: 0 2px;
       &:hover {
-        color: #FFC300;
+        color: #FE8C00;
       }
     }
     .username {
-      color: #FFC300;
+      color: #FE8C00;
       cursor: pointer;
     }
     .login,
@@ -33,11 +33,11 @@
       color: #999;
       margin: 0 5px;
       &.login {
-        color: #FFC300;
+        color: #FE8C00;
         margin: 0 5px 0 20px;
       }
       &:hover {
-        color: #FFC300;
+        color: #FE8C00;
       }
     }
   }
@@ -61,7 +61,7 @@
           color: #999;
 
           &:hover {
-            color: #FFC300;
+            color: #FE8C00;
           }
         }
 
@@ -151,14 +151,14 @@
 
           >dl {
             box-sizing: border-box;
-            text-align: left;
+            text-align: center;
             display: inline-block !important;
-            margin-right: 47px;
+            margin-right: 30px;
 
             dt {
               margin-bottom: 26px;
               font-size: 14px;
-              color: #FE8C00;
+              color: #222222;
               text-align: center;
             }
 
@@ -169,11 +169,11 @@
             }
 
             &.hotel {
-              width: 234px;
+              width: 300px;
             }
 
             &.food {
-              width: 156px;
+              width: 200px;
             }
 
             &.movie {

@@ -1,14 +1,4 @@
-/*
- * @Description: 
- * @version: 
- * @Author: YoungW
- * @Date: 2020-07-01 15:34:50
- * @LastEditors: YoungW
- * @LastEditTime: 2020-07-01 15:35:13
- */ 
-const state = () => ({
-  position: {}
-})
+const state = () => ({position: {}})
 
 const mutations = {
   setPosition(state, val) {
@@ -17,16 +7,11 @@ const mutations = {
 }
 
 const actions = {
-  setPostion: ({
+  setPosition: ({
     commit
   }, position) => {
     commit('setPosition', position)
   }
 }
 
-module.exports = {
-  namespaced: true,
-  state,
-  mutations,
-  actions
-}
+export default {namespaced: true, state, mutations, actions}

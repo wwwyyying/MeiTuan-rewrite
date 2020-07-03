@@ -2,82 +2,84 @@
  * @Description: 
  * @version: 
  * @Author: YoungW
- * @Date: 2020-06-29 21:14:33
+ * @Date: 2020-07-03 20:04:44
  * @LastEditors: YoungW
- * @LastEditTime: 2020-07-01 11:28:56
+ * @LastEditTime: 2020-07-03 22:31:56
  */ 
+const pkg = require('./package')
 
 module.exports = {
-  /*
-  ** Nuxt rendering mode
-  ** See https://nuxtjs.org/api/configuration-mode
-  */
   mode: 'universal',
-  /*
-  ** Nuxt target
-  ** See https://nuxtjs.org/api/configuration-target
-  */
-  target: 'server',
+
   /*
   ** Headers of the page
-  ** See https://nuxtjs.org/api/configuration-head
   */
   head: {
-    title: '北京美团网-北京美食_酒店_旅游_团购_电影_吃喝玩乐' || process.env.npm_package_name,
+    title: '北京美团网-北京美食_酒店_旅游_团购_电影_吃喝玩乐' || pkg.name,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+
+  /*
+  ** Customize the progress-bar color
+  */
+  loading: { color: '#FFFFFF' },
+
   /*
   ** Global CSS
   */
   css: [
     'element-ui/lib/theme-chalk/reset.css',
     'element-ui/lib/theme-chalk/index.css',
-    '~assets/css/main.css'
+    '@/assets/css/main.css'
   ],
+
   /*
   ** Plugins to load before mounting the App
-  ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
     '@/plugins/element-ui'
   ],
-  /*
-  ** Auto import components
-  ** See https://nuxtjs.org/api/configuration-components
-  */
-  components: true,
-  /*
-  ** Nuxt.js dev-modules
-  */
-  buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
-    // '@nuxtjs/eslint-module'
-  ],
+
   /*
   ** Nuxt.js modules
   */
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
+    // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios'
   ],
   /*
   ** Axios module configuration
-  ** See https://axios.nuxtjs.org/options
   */
-  axios: {},
+  axios: {
+    // See https://github.com/nuxt-community/axios-module#options
+  },
+
   /*
   ** Build configuration
-  ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
-    transpile: [/^element-ui/],
-    cache: true
+    /*
+    ** You can extend webpack config here
+    */
+    extend(config, ctx) {
+      // Run ESLint on save
+      if (ctx.isDev && ctx.Client) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        })
+      }
+    },
+    // https://github.com/nuxt/nuxt.js/issues/3804
+    cache:false
   }
 }

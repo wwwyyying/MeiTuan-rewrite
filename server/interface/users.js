@@ -1,28 +1,21 @@
-/*
- * @Description: 
- * @version: 
- * @Author: YoungW
- * @Date: 2020-06-30 22:01:02
- * @LastEditors: YoungW
- * @LastEditTime: 2020-07-01 19:28:32
- */ 
+import Router from 'koa-router';
+import Redis from 'koa-redis'
+import nodeMailer from 'nodemailer'
+import User from '../dbs/models/users'
+import Passport from './utils/passport'
+import Email from '../dbs/config'
+import axios from './utils/axios'
 
-const Router = require('koa-router')
-const Redis = require('koa-redis')
-const nodeMailer = require('nodemailer')
-const User = require('../dbs/models/users')
-const Passport = require('./utils/passport')
-const Email = require('../dbs/config')
-const axios = require('./utils/axios')
-
+//声明路由
 let router = new Router({prefix: '/users'})
 
+//获取redis客户端
 let Store = new Redis().client
 
-//注册
+//注册接口
 router.post('/signup', async (ctx) => {
   const {username, password, email, code} = ctx.request.body;
-
+  //从redis中获取 在nodemail发验证码的时候 的存储数据，并将存储数据与浏览器获取的数据进行对比
   if (code) {
     const saveCode = await Store.hget(`nodemail:${username}`, 'code')
     const saveExpire = await Store.hget(`nodemail:${username}`, 'expire')
@@ -76,9 +69,7 @@ router.post('/signup', async (ctx) => {
     }
   }
 })
-
-
-//登录
+//登录接口
 router.post('/signin', async (ctx, next) => {
   return Passport.authenticate('local', function(err, user, info, status) {
     if (err) {
@@ -103,12 +94,11 @@ router.post('/signin', async (ctx, next) => {
     }
   })(ctx, next)
 })
-
-
-//验证
+//验证码验证接口
 router.post('/verify', async (ctx, next) => {
   let username = ctx.request.body.username
   const saveExpire = await Store.hget(`nodemail:${username}`, 'expire')
+  //拦截频繁刷接口操作
   if (saveExpire && new Date().getTime() - saveExpire < 0) {
     ctx.body = {
       code: -1,
@@ -116,6 +106,7 @@ router.post('/verify', async (ctx, next) => {
     }
     return false
   }
+  //发邮件功能
   let transporter = nodeMailer.createTransport({
     service: 'qq',
     auth: {
@@ -123,22 +114,26 @@ router.post('/verify', async (ctx, next) => {
       pass: Email.smtp.pass
     }
   })
+  //确定接收方，发送相关信息
   let ko = {
     code: Email.smtp.code(),
     expire: Email.smtp.expire(),
     email: ctx.request.body.email,
     user: ctx.request.body.username
   }
+  //邮件中显示内容定义
   let mailOptions = {
     from: `"认证邮件" <${Email.smtp.user}>`,
     to: ko.email,
-    subject: '《慕课网高仿美团网全栈实战》注册码',
-    html: `您在《慕课网高仿美团网全栈实战》课程中注册，您的邀请码是${ko.code}`
+    subject: '《一百个Chocolate高仿美团网全栈开发》注册码',
+    html: `您在《一百个Chocolate高仿美团网》网页中注册，您的邀请码是${ko.code}`
   }
+  //发送邮件
   await transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       return console.log(error)
     } else {
+      //存储注册方信息
       Store.hmset(`nodemail:${ko.user}`, 'code', ko.code, 'expire', ko.expire, 'email', ko.email)
     }
   })
@@ -147,10 +142,11 @@ router.post('/verify', async (ctx, next) => {
     msg: '验证码已发送，可能会有延时，有效期1分钟'
   }
 })
-
-//退出
+//退出接口
 router.get('/exit', async (ctx, next) => {
+  //执行注销操作
   await ctx.logout()
+  //进行二次验证，看是否成功注销掉，是否已认证
   if (!ctx.isAuthenticated()) {
     ctx.body = {
       code: 0
@@ -161,8 +157,7 @@ router.get('/exit', async (ctx, next) => {
     }
   }
 })
-
-//获取用户信息
+//获取用户
 router.get('/getUser', async (ctx) => {
   if (ctx.isAuthenticated()) {
     const {username, email} = ctx.session.passport.user
@@ -178,4 +173,4 @@ router.get('/getUser', async (ctx) => {
   }
 })
 
-module.exports = router
+export default router

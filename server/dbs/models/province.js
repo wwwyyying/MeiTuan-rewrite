@@ -1,24 +1,14 @@
-/*
- * @Description: 
- * @version: 
- * @Author: YoungW
- * @Date: 2020-07-01 16:10:12
- * @LastEditors: YoungW
- * @LastEditTime: 2020-07-01 16:40:25
- */ 
-const mongoose = require('mongoose')
-
+import mongoose from 'mongoose'
 const Schema = mongoose.Schema
-
-const ProvinceSchema = new Schema({
-  id: {
-    type: String,
-    required: true
+const Province=new Schema({
+  id:{
+    type:String,
+    require:true
   },
-  value: {
-    type: Array,
-    required: true
+  value:{
+    type:Array,
+    require:true
   }
 })
 
-module.exports = mongoose.model('Province', ProvinceSchema)
+export default mongoose.model('Province',Province)

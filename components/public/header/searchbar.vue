@@ -4,7 +4,7 @@
  * @Author: YoungW
  * @Date: 2020-06-30 13:34:24
  * @LastEditors: YoungW
- * @LastEditTime: 2020-07-02 15:10:09
+ * @LastEditTime: 2020-07-03 21:00:24
 -->
 <template>
   <div class="search-panel">
@@ -105,7 +105,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

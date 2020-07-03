@@ -4,7 +4,7 @@
  * @Author: YoungW
  * @Date: 2020-06-29 21:14:33
  * @LastEditors: YoungW
- * @LastEditTime: 2020-06-30 18:41:13
+ * @LastEditTime: 2020-07-03 20:12:22
 -->
 <template>
   <div class="page-index">
@@ -38,5 +38,5 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "@/assets/css/index/index.scss"
+  @import "@/assets/css/index/index.scss";
 </style>

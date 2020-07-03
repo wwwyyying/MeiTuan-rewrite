@@ -1,22 +1,14 @@
-/*
- * @Description: 
- * @version: 
- * @Author: YoungW
- * @Date: 2020-07-03 16:44:18
- * @LastEditors: YoungW
- * @LastEditTime: 2020-07-03 17:03:39
- */ 
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 const City = new Schema({
   id: {
     type: String,
-    required: true
+    require: true
   },
   value: {
     type: Array,
-    required: true
+    require: true
   }
 })
 
-module.exports = mongoose.model('city', City)
+export default mongoose.model('City', City)

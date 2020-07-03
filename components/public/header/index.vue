@@ -4,7 +4,7 @@
  * @Author: YoungW
  * @Date: 2020-06-30 14:34:03
  * @LastEditors: YoungW
- * @LastEditTime: 2020-06-30 15:26:45
+ * @LastEditTime: 2020-07-03 20:38:46
 -->
 <template>
   <div class="m-header">
@@ -33,5 +33,8 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "@/assets/css/public/header/index.scss"
+  @import "@/assets/css/public/header/index.scss";
+  @import "@/assets/css/public/layout.scss";
+  @import "@/assets/css/public/header/search.scss";
+  @import "@/assets/css/public/header/topbar.scss";
 </style>

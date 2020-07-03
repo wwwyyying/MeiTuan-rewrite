@@ -4,14 +4,14 @@
  * @Author: YoungW
  * @Date: 2020-06-30 15:58:59
  * @LastEditors: YoungW
- * @LastEditTime: 2020-07-01 16:01:24
+ * @LastEditTime: 2020-07-03 21:23:36
 -->
 <template>
   <div class="m-menu">
     <dl class="nav" @mouseleave="mouseleave">
       <dt>全部分类</dt>
       <dd v-for="(item, idx) in $store.state.home.menu" :key="idx" @mouseenter="enter">
-        <i :class="item.type"></i>{{item.name}}<span class="arrow"/>
+        <i :class="item.type"></i><span class="name">{{item.name}}</span><span class="arrow"/>
       </dd>
     </dl>
     <div class="detail" v-if="kind" @mouseenter="sover" @mouseleave="sout">

@@ -1,15 +1,4 @@
-/*
- * @Description: 
- * @version: 
- * @Author: YoungW
- * @Date: 2020-07-01 15:40:41
- * @LastEditors: YoungW
- * @LastEditTime: 2020-07-01 15:44:16
- */ 
-const state = () => ({
-  menu: [],
-  hotPlace: []
-})
+const state = () => ({menu: [], hotPlace: []})
 
 const mutations = {
   setMenu(state, val) {
@@ -26,7 +15,6 @@ const actions = {
   }, menu) => {
     commit('setMenu', menu)
   },
-
   setHotPlace: ({
     commit
   }, hotPlace) => {
@@ -34,9 +22,4 @@ const actions = {
   }
 }
 
-module.exports = {
-  namespaced: true,
-  state,
-  mutations,
-  actions
-}
+export default {namespaced: true, state, mutations, actions}
