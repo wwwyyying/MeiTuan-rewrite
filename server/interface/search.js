@@ -4,7 +4,7 @@
  * @Author: YoungW
  * @Date: 2020-07-01 19:34:56
  * @LastEditors: YoungW
- * @LastEditTime: 2020-07-01 20:45:32
+ * @LastEditTime: 2020-07-03 15:21:37
  */ 
 const Router = require('koa-router')
 const axios = require('./utils/axios')
@@ -42,6 +42,32 @@ router.get('/resultsByKeywords', async(ctx, next) => {
   ctx.body = {
     count: status===200? count: 0,
     pois: status===200? pois: []
+  }
+})
+
+router.get('/products', async(ctx, next) => {
+  let keyword = ctx.query.keyword || '旅游'
+  let city = ctx.query.keyword || '北京'
+
+  let {status, data: {product, more}} = await axios.get('http://cp-tools.cn/search/products', {
+    params: {
+      keyword,
+      city
+    }
+  })
+
+  if (status === 200) {
+    ctx.body = {
+      product,
+      more: ctx.isAuthenticated() ? more : [],
+      login: ctx.isAuthenticated()
+    }
+  } else {
+    ctx.body = {
+      product: {},
+      more: ctx.isAuthenticated() ? more: [],
+      login: ctx.isAuthenticated()
+    }
   }
 })
 

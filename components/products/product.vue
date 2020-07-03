@@ -4,7 +4,7 @@
  * @Author: YoungW
  * @Date: 2020-07-02 13:46:43
  * @LastEditors: YoungW
- * @LastEditTime: 2020-07-02 19:50:59
+ * @LastEditTime: 2020-07-03 15:46:41
 --> 
 <template>
   <dl class="s-item" @mouseenter="curDOM">
@@ -14,7 +14,7 @@
         alt="商品图片">
     </dt>
     <dd>
-      <h3><nuxt-link :to="{path:'detail',query:{keyword:meta.name,type:meta.module}}">{{ meta.name }}</nuxt-link></h3>
+      <h3><nuxt-link :to="{path:'detail',query:{keyword:meta.name,type:meta.module}} ">{{ meta.name }}</nuxt-link></h3>
       <el-rate
         v-model="meta.rate"
         :colors="['#ff9900', '#ff9900', '#FF9900']"

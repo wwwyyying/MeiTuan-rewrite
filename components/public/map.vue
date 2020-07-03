@@ -4,7 +4,7 @@
  * @Author: YoungW
  * @Date: 2020-07-02 15:28:14
  * @LastEditors: YoungW
- * @LastEditTime: 2020-07-02 15:28:50
+ * @LastEditTime: 2020-07-03 15:44:17
 --> 
 <template>
   <div
@@ -38,9 +38,9 @@ export default {
     }
   },
   watch: {
-    point: function (val, old) {
-      this.map.setCenter(val)
-      this.marker.setPosition(val)
+    point: function (val, old) {    
+        this.map.setCenter(val)
+        this.marker.setPosition(val)
     }
   },
   mounted() {
