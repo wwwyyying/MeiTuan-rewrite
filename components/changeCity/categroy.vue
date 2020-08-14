@@ -75,7 +75,7 @@ export default {
       that.$router.push({
         path: '/'
       })
-      // that.$store.dispatch('home/setHotPlace')
+      that.$store.dispatch('home/setHotPlace')
     }
   }
 }

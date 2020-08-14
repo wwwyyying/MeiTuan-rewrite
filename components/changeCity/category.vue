@@ -83,14 +83,15 @@ export default {
       }
 
       //更新热门搜索状态
-      console.log(cityItem)
-      let {status: status2, data: {result}} = await self.$axios.get('/search/hotPlace', {
-        params: {
-          city: cityItem.replace('市', '')
-        }
-      })
+      // console.log(cityItem)
+      // let {status: status2, data: {result}} = await self.$axios.get('/search/hotPlace', {
+      //   params: {
+      //     city: cityItem.replace('市', '')
+      //   }
+      // })
+      
 
-      this.$store.commit('home/setHotPlace', status2===200? result : [])
+      // this.$store.commit('home/setHotPlace', status2===200? result : [])
 
       this.$router.push("/")
     }
